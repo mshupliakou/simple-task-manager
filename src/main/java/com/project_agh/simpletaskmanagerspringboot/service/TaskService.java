@@ -58,4 +58,9 @@ public class TaskService {
         }
     }
 
+    public void getAllTasks() {
+        for(Task task : taskList){
+            System.out.println(task.getId() + ": " +task.getDescription() +" Completed("+task.getCompleted());
+        }
+    }
 }
