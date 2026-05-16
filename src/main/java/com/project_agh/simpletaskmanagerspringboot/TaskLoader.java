@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Profile("load")
 public class TaskLoader {
 
-    @Value("${app.task-file-path}")
+    @Value("${app.tasks-file-path}")
     private String filepath;
 
     private final TaskService taskService;

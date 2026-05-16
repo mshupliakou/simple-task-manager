@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SaveTasksEventListener {
-    @Value("${app.task-file-path}")
+    @Value("${app.tasks-file-path}")
     private String filepath;
 
     private final TaskService taskService;
@@ -18,7 +18,7 @@ public class SaveTasksEventListener {
     }
 
     @EventListener(SaveTaskEvent.class)
-    public void onEvent(ContextRefreshedEvent event) {
+    public void onEvent(SaveTaskEvent event) {
         System.out.println("Save tasks...");
         taskService.saveTask(filepath);
     }

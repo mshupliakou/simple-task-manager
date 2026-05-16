@@ -4,7 +4,7 @@ import com.project_agh.simpletaskmanagerspringboot.event.SaveTaskEvent;
 import com.project_agh.simpletaskmanagerspringboot.service.TaskService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Scanner;
 
@@ -12,21 +12,13 @@ import java.util.Scanner;
 public class SimpleTaskManagerSpringBootApplication {
 
     public static void main(String[] args) {
-        new SimpleTaskManagerSpringBootApplication().start();
-    }
+        ConfigurableApplicationContext context = SpringApplication.run(SimpleTaskManagerSpringBootApplication.class, args);
 
-    public void start(){
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         TaskService taskService = context.getBean(TaskService.class);
         Scanner scanner = new Scanner(System.in);
 
         while(true) {
-            System.out.print("1. Add task");
-            System.out.print("2. Complete task");
-            System.out.print("3. List tasks");
-            System.out.print("4. Save tasks");
-            System.out.print("5. Exit");
-
+            System.out.println("\n1. Add task | 2. Complete task | 3. List tasks | 4. Save tasks | 5. Exit");
             int option = scanner.nextInt();
             scanner.nextLine();
 
@@ -50,13 +42,12 @@ public class SimpleTaskManagerSpringBootApplication {
                 }
                 case 4: {
                     System.out.println("Save tasks:");
-                    context.publishEvent(new SaveTaskEvent(this));
+                    context.publishEvent(new SaveTaskEvent(SimpleTaskManagerSpringBootApplication.class));
                     break;
                 }
                 case 5: {
                     context.close();
                     return;
-
                 }
                 default: {
                     System.out.println("Invalid option. Try again");
@@ -64,5 +55,4 @@ public class SimpleTaskManagerSpringBootApplication {
             }
         }
     }
-
 }
