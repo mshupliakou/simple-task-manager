@@ -1,7 +1,7 @@
 package com.project_agh.simpletaskmanagerspringboot.event;
 
 import com.project_agh.simpletaskmanagerspringboot.service.TaskService;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -20,5 +20,6 @@ public class SaveTasksEventListener {
     @EventListener(SaveTaskEvent.class)
     public void onEvent(ContextRefreshedEvent event) {
         System.out.println("Save tasks...");
+        taskService.saveTask(filepath);
     }
 }
